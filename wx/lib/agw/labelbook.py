@@ -1638,7 +1638,7 @@ class LabelContainer(ImageContainerBase):
 
             if self.HasAGWFlag(INB_SHOW_ONLY_TEXT):
                 font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
-                font.SetPointSize(font.GetPointSize() * self.GetParent().GetFontSizeMultiple())
+                font.SetPointSize(int(font.GetPointSize() * self.GetParent().GetFontSizeMultiple()))
 
                 if self.GetParent().GetFontBold():
                     font.SetWeight(wx.FONTWEIGHT_BOLD)
@@ -2050,7 +2050,7 @@ class LabelContainer(ImageContainerBase):
         imgRect = wx.Rect(*rect)
 
         font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
-        font.SetPointSize(font.GetPointSize() * self.GetParent().GetFontSizeMultiple())
+        font.SetPointSize(int(font.GetPointSize() * self.GetParent().GetFontSizeMultiple()))
 
         if self.GetParent().GetFontBold():
             font.SetWeight(wx.FONTWEIGHT_BOLD)
@@ -2069,7 +2069,7 @@ class LabelContainer(ImageContainerBase):
 
         # Text bounding rectangle
         textRect.x += nPadding
-        textRect.y = rect.y + (rect.height - h)/2
+        textRect.y = rect.y + (rect.height - h)//2
         textRect.width = rect.width - 2 * nPadding
 
         if bmp.IsOk() and not self.HasAGWFlag(INB_SHOW_ONLY_TEXT):
@@ -2496,7 +2496,7 @@ class FlatBookBase(wx.Panel):
             dc = wx.MemoryDC()
             dc.SelectObject(wx.Bitmap(1, 1))
             font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
-            font.SetPointSize(font.GetPointSize()*self._fontSizeMultiple)
+            font.SetPointSize(int(font.GetPointSize()*self._fontSizeMultiple))
             if self.GetFontBold() or agwStyle & INB_BOLD_TAB_SELECTION:
                 font.SetWeight(wx.FONTWEIGHT_BOLD)
             dc.SetFont(font)

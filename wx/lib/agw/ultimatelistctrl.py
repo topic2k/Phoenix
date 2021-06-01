@@ -4546,7 +4546,7 @@ class UltimateListLineData(object):
                 # We got a checkbox-type item
                 ix, iy = self._owner.GetCheckboxImageSize()
                 checked = item.IsChecked()
-                self._owner.DrawCheckbox(dc, xOld, y + (height-iy+1)/2, item.GetKind(), checked, enabled)
+                self._owner.DrawCheckbox(dc, xOld, y + (height-iy+1)//2, item.GetKind(), checked, enabled)
                 xOld += ix
                 width -= ix
 
@@ -4573,7 +4573,7 @@ class UltimateListLineData(object):
                 xa, ya = self._owner.CalcScrolledPosition((0, rect.y))
                 wndx += xa
                 if rect.height > ySize and not item._expandWin:
-                    ya += (rect.height - ySize)/2
+                    ya += (rect.height - ySize)//2
 
             itemRect = wx.Rect(xOld-2*HEADER_OFFSET_X, rect.y, width-xSize-HEADER_OFFSET_X, rect.height)
             if overflow:
@@ -5230,7 +5230,7 @@ class UltimateListHeaderWindow(wx.Control):
                 # We got a checkbox-type item
                 ix, iy = self._owner.GetCheckboxImageSize()
                 # We draw it on the left, always
-                self._owner.DrawCheckbox(dc, x + HEADER_OFFSET_X, HEADER_OFFSET_Y + (h - 4 - iy)/2, kind, checked, enabled)
+                self._owner.DrawCheckbox(dc, x + HEADER_OFFSET_X, HEADER_OFFSET_Y + (h - 4 - iy)//2, kind, checked, enabled)
                 wcheck += ix + HEADER_IMAGE_MARGIN_IN_REPORT_MODE
                 cw -= ix + HEADER_IMAGE_MARGIN_IN_REPORT_MODE
 
@@ -5265,7 +5265,7 @@ class UltimateListHeaderWindow(wx.Control):
                 xAligned = x + cw - wLabel - HEADER_OFFSET_X
 
             elif align == ULC_FORMAT_CENTER:
-                xAligned = x + wcheck + (cw - wLabel)/2
+                xAligned = x + wcheck + (cw - wLabel)//2
 
             # if we have an image, draw it on the right of the label
             if imageList:
@@ -5273,7 +5273,7 @@ class UltimateListHeaderWindow(wx.Control):
                     if img >= 0:
                         imageList.Draw(img, dc,
                                        xAligned + wLabel - (ix + HEADER_IMAGE_MARGIN_IN_REPORT_MODE)*(indx+1),
-                                       HEADER_OFFSET_Y + (h - 4 - iy)/2,
+                                       HEADER_OFFSET_Y + (h - 4 - iy)//2,
                                        wx.IMAGELIST_DRAW_TRANSPARENT)
 
                         cw -= ix + HEADER_IMAGE_MARGIN_IN_REPORT_MODE
@@ -6819,7 +6819,7 @@ class UltimateListMainWindow(wx.ScrolledWindow):
                     # We got a checkbox-type item
                     ix, iy = self.GetCheckboxImageSize()
                     LH = self.GetLineHeight(line)
-                    rect = wx.Rect(xOld, lineY + LH/2 - iy/2, ix, iy)
+                    rect = wx.Rect(xOld, lineY + LH//2 - iy//2, ix, iy)
                     if rect.Contains((x, y)):
                         newItem = self.GetParent().GetItem(line, col)
                         return newItem, ULC_HITTEST_ONITEMCHECK
@@ -9654,8 +9654,8 @@ class UltimateListMainWindow(wx.ScrolledWindow):
                 self._linesPerPage = clientHeight//lineHeight
 
                 self.SetScrollbars(SCROLL_UNIT_X, lineHeight,
-                                   (self.GetHeaderWidth()-decrement)/SCROLL_UNIT_X,
-                                   (entireHeight + lineHeight - 1)/lineHeight,
+                                   (self.GetHeaderWidth()-decrement)//SCROLL_UNIT_X,
+                                   (entireHeight + lineHeight - 1)//lineHeight,
                                    self.GetScrollPos(wx.HORIZONTAL),
                                    self.GetScrollPos(wx.VERTICAL),
                                    True)
@@ -9676,8 +9676,8 @@ class UltimateListMainWindow(wx.ScrolledWindow):
                     decrement = SCROLL_UNIT_X
 
                 self.SetScrollbars(SCROLL_UNIT_X, SCROLL_UNIT_Y,
-                                   (self.GetHeaderWidth()-decrement)/SCROLL_UNIT_X,
-                                   (entireHeight + SCROLL_UNIT_Y - 1)/SCROLL_UNIT_Y,
+                                   (self.GetHeaderWidth()-decrement)//SCROLL_UNIT_X,
+                                   (entireHeight + SCROLL_UNIT_Y - 1)//SCROLL_UNIT_Y,
                                    self.GetScrollPos(wx.HORIZONTAL),
                                    self.GetScrollPos(wx.VERTICAL),
                                    True)
